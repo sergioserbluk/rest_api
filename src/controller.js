@@ -40,12 +40,18 @@ async update(req, res){
         console.log(e);
     }
 }
-async delete(req, res){
-    const libro=req.body;
-    const [result]=await pool.query('DELETE FROM libros WHERE id=?',[libro.id]);
-    res.json(result);
-}
 
+async delete(req, res){
+    //agrego un try catch para que no se caiga la app si se reciben parametros incorrectos
+    try{
+        const libro=req.body;
+        const [result]=await pool.query('DELETE FROM libros WHERE id=?',[libro.id]);
+        res.json(result);
+    }
+    catch(e){
+        console.log(e);
+    }
+}
 
 }
 export const libro = new LibrosController();
