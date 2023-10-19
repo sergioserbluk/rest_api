@@ -30,10 +30,15 @@ async create(req, res){
 }
  
 async update(req, res){
-    //const {id}=req.params;
-    const libro=req.body;
-    const [result]=await pool.query('UPDATE libros SET nombre=?, autor=?,categoria=?, anio_publicacion=?, isbn=? WHERE id=?',[libro.nombre, libro.autor, libro.categoria, libro.anio_publicacion, libro.isbn, libro.id]);
-    res.json(result);
+    //agrego un try catch para que no se caiga la app si se reciben parametros incorrectos
+    try{
+        const libro=req.body;
+        const [result]=await pool.query('UPDATE libros SET nombre=?, autor=?,categoria=?, anio_publicacion=?, isbn=? WHERE id=?',[libro.nombre, libro.autor, libro.categoria, libro.anio_publicacion, libro.isbn, libro.id]);
+        res.json(result);
+    }
+    catch(e){
+        console.log(e);
+    }
 }
 async delete(req, res){
     const libro=req.body;
