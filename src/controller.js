@@ -5,9 +5,16 @@ class LibrosController{
         res.json(result);
 }
 async getOne(req, res){
-    const libro=req.body;
-    const [result]=await pool.query('SELECT * FROM libros WHERE id=?',[libro.id]);
-    res.json(result);
+    //agrego un try catch para que no se caiga la app si no encuentra el id
+    try{
+        ;const libro=req.body;
+        const [result]=await pool.query('SELECT * FROM libros WHERE id=?',[libro.id]);
+        res.json(result);
+    }
+    catch(e){
+        console.log(e);
+    }
+
 }
 
 async create(req, res){
