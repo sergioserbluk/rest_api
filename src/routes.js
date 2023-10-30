@@ -7,3 +7,4 @@ router.get("/libro", libro.getOne);
 router.post("/libro", libro.create);
 router.put("/libro", libro.update);
 router.delete("/libro", libro.delete);
+router.delete("/delbyisbn", libro.deleteByISBN)
